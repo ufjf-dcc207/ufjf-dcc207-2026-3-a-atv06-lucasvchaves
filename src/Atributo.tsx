@@ -7,10 +7,10 @@ type AtributoProps = {
 
 export default function Atributo({icone}: AtributoProps) {
     const [val, setVal] = useState(3);
-    const ATRIBUTO_MAX = 5;
+    const ATRIBUTO_MAX = 12;
 
     function changeVal() {
-        if (val === 5) {
+        if (val === ATRIBUTO_MAX) {
             setVal(0);
         } else {
             setVal(val + 1);
