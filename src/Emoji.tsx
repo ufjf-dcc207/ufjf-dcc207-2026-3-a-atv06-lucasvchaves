@@ -16,6 +16,16 @@ export default function Emoji() {
         console.log("Happy");
         setStatus("happy");
     }
+
+    function sickClick() {
+        console.log("Happy");
+        setStatus("sick");
+    }
+
+    function deadClick() {
+        console.log("Happy");
+        setStatus("dead");
+    }
     
     return (
         <>
@@ -24,8 +34,8 @@ export default function Emoji() {
             </div>
             <div className="acoes">
                 <button onClick={happyClick}>Happy</button>
-                <button>Sick</button>
-                <button>Dead</button>
+                <button onClick={sickClick}>Sick</button>
+                <button onClick={deadClick}>Dead</button>
             </div>
         </>
     );
