@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Emoji.css"
+import Atributo from "./Atributo";
 
 type EMOJI_KEYS = "happy" | "sick" | "dead";
 
@@ -28,7 +29,7 @@ export default function Emoji() {
     }
 
     function cycleStatus() {
-        switch(status) {
+        switch (status) {
             case "happy":
                 setStatus("sick");
                 break;
@@ -43,19 +44,25 @@ export default function Emoji() {
                 break;
         }
     }
-    
+
     return (
         <>
             <div className="emoji">
-                {EMOJI_MAP.get(status) || "🫥"} 
-            </div>
-            <div className="acoes">
-                <button onClick={happyClick}>Happy</button>
-                <button onClick={sickClick}>Sick</button>
-                <button onClick={deadClick}>Dead</button>
-            </div>
-            <div className="botaoUnico">
-                <button onClick={cycleStatus}>Cycle</button>
+                <div className="status">
+                    {EMOJI_MAP.get(status) || "🫥"}
+                </div>
+                <div className="atributos">
+                    <Atributo icone="💚"></Atributo>
+                    <Atributo icone="⚡"></Atributo>
+                    <Atributo icone="🩸"></Atributo>
+                    <Atributo icone="🥩"></Atributo>
+                </div>
+                <div className="acoes">
+                    <button onClick={happyClick}>Happy</button>
+                    <button onClick={sickClick}>Sick</button>
+                    <button onClick={deadClick}>Dead</button>
+                    <button onClick={cycleStatus}>Cycle</button>
+                </div>
             </div>
         </>
     );

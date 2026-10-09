@@ -1,0 +1,7 @@
+.atributo {
+    display: flex;
+}
+
+.inativo {
+    filter: grayscale(100%);
+}
