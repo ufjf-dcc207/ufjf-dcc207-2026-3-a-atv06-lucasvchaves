@@ -26,6 +26,23 @@ export default function Emoji() {
         console.log("Happy");
         setStatus("dead");
     }
+
+    function cycleStatus() {
+        switch(status) {
+            case "happy":
+                setStatus("sick");
+                break;
+            case "sick":
+                setStatus("dead");
+                break;
+            case "dead":
+                setStatus("happy");
+                break;
+            default:
+                setStatus("dead");
+                break;
+        }
+    }
     
     return (
         <>
@@ -36,6 +53,9 @@ export default function Emoji() {
                 <button onClick={happyClick}>Happy</button>
                 <button onClick={sickClick}>Sick</button>
                 <button onClick={deadClick}>Dead</button>
+            </div>
+            <div className="botaoUnico">
+                <button onClick={cycleStatus}>Cycle</button>
             </div>
         </>
     );
