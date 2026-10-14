@@ -7,14 +7,15 @@ type AtributoProps = {
 
 export default function Atributo({icone}: AtributoProps) {
     const [val, setVal] = useState(3);
-    const ATRIBUTO_MAX = 12;
+    const ATRIBUTO_MAX = 5;
 
-    function changeVal() {
-        if (val === ATRIBUTO_MAX) {
+    function changeVal(prevVal: number) {
+        if (prevVal === ATRIBUTO_MAX) {
             setVal(0);
         } else {
-            setVal(val + 1);
+            setVal(prevVal + 1);
         }
+        
         console.log(val);
     }
 
@@ -23,7 +24,7 @@ export default function Atributo({icone}: AtributoProps) {
             <div className="atributo">
                 <div className="ativo">{icone.repeat(val)}</div>
                 <div className="inativo">{icone.repeat(ATRIBUTO_MAX - val)}</div>
-                <button onClick={changeVal}>Change</button>
+                <button onClick={() => {changeVal(val)}}>Change</button>
             </div>
         </>
     );
