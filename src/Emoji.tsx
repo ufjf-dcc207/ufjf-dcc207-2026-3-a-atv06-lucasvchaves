@@ -13,22 +13,19 @@ const EMOJI_MAP = new Map<EMOJI_KEYS, string>([
 export default function Emoji() {
     let [status, setStatus] = useState<EMOJI_KEYS>("sick");
 
-    function happyClick() {
-        console.log("Happy");
-        setStatus("happy");
+    function onAlimentar() {
+
     }
 
-    function sickClick() {
-        console.log("Happy");
-        setStatus("sick");
+    function onHidratar() {
+
     }
 
-    function deadClick() {
-        console.log("Happy");
-        setStatus("dead");
+    function onLigarDesligar() {
+
     }
 
-    function cycleStatus() {
+    function onCiclo() {
         switch (status) {
             case "happy":
                 setStatus("sick");
@@ -46,9 +43,8 @@ export default function Emoji() {
     }
 
     return (
-        <>
-            <div className="emoji">
-                <div className="status">
+        <div className="emoji">
+                <div className="face">
                     {EMOJI_MAP.get(status) || "🫥"}
                 </div>
                 <div className="atributos">
@@ -58,12 +54,11 @@ export default function Emoji() {
                     <Atributo icone="🥩"></Atributo>
                 </div>
                 <div className="acoes">
-                    <button onClick={happyClick}>Happy</button>
-                    <button onClick={sickClick}>Sick</button>
-                    <button onClick={deadClick}>Dead</button>
-                    <button onClick={cycleStatus}>Cycle</button>
+                    <button onClick={onAlimentar}>Alimentar</button>
+                    <button onClick={onHidratar}>Hidratar</button>
+                    <button onClick={onLigarDesligar}>Ligar Luz</button>
+                    <button onClick={onCiclo}>Ciclo</button>
                 </div>
-            </div>
-        </>
+        </div>
     );
 }

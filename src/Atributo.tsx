@@ -24,7 +24,6 @@ export default function Atributo({icone}: AtributoProps) {
             <div className="atributo">
                 <div className="ativo">{icone.repeat(val)}</div>
                 <div className="inativo">{icone.repeat(ATRIBUTO_MAX - val)}</div>
-                <button onClick={() => {changeVal(val)}}>Change</button>
             </div>
         </>
     );
