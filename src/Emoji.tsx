@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import "./Emoji.css"
 import Atributo from "./Atributo";
 
@@ -12,13 +12,19 @@ const EMOJI_MAP = new Map<EMOJI_KEYS, string>([
 
 export default function Emoji() {
     let [status, setStatus] = useState<EMOJI_KEYS>("sick");
+    let [vida, setVida] = useState(0);
+    let [comida, setComida] = useState(0);
+    let [agua, setAgua] = useState(0);
+    let [energia, setEnergia] = useState(0);
+
+    const ATRIBUTO_MAX = 5;
 
     function onAlimentar() {
-
+        setComida(Math.min(ATRIBUTO_MAX, comida + 1));
     }
 
     function onHidratar() {
-
+        setAgua(Math.min(ATRIBUTO_MAX, agua + 1));
     }
 
     function onLigarDesligar() {
@@ -48,10 +54,10 @@ export default function Emoji() {
                     {EMOJI_MAP.get(status) || "🫥"}
                 </div>
                 <div className="atributos">
-                    <Atributo icone="💚"></Atributo>
-                    <Atributo icone="⚡"></Atributo>
-                    <Atributo icone="🩸"></Atributo>
-                    <Atributo icone="🥩"></Atributo>
+                    <Atributo icone="💚" valor={vida}></Atributo>
+                    <Atributo icone="⚡" valor={energia}></Atributo>
+                    <Atributo icone="🍹" valor={agua}></Atributo>
+                    <Atributo icone="🥩" valor={comida}></Atributo>
                 </div>
                 <div className="acoes">
                     <button onClick={onAlimentar}>Alimentar</button>
