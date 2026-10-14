@@ -11,11 +11,12 @@ const EMOJI_MAP = new Map<EMOJI_KEYS, string>([
 ]);
 
 export default function Emoji() {
-    let [status, setStatus] = useState<EMOJI_KEYS>("sick");
-    let [vida, setVida] = useState(0);
-    let [comida, setComida] = useState(0);
-    let [agua, setAgua] = useState(0);
-    let [energia, setEnergia] = useState(0);
+    const [status, setStatus] = useState<EMOJI_KEYS>("happy");
+    const [vida, setVida] = useState<number>(5);
+    const [comida, setComida] = useState<number>(5);
+    const [agua, setAgua] = useState<number>(5);
+    const [energia, setEnergia] = useState<number>(5);
+    const [luz, setLuz] = useState<boolean>(true);
 
     const ATRIBUTO_MAX = 5;
 
@@ -28,23 +29,24 @@ export default function Emoji() {
     }
 
     function onLigarDesligar() {
-
+        setLuz(!luz);
     }
 
     function onCiclo() {
-        switch (status) {
-            case "happy":
-                setStatus("sick");
-                break;
-            case "sick":
-                setStatus("dead");
-                break;
-            case "dead":
-                setStatus("happy");
-                break;
-            default:
-                setStatus("dead");
-                break;
+        setComida(Math.max(0, comida - 1));
+        if (comida === 0) {
+            setVida(Math.max(0, vida - 1));
+        }
+
+        setAgua(Math.max(0, agua - 1));
+        if (comida === 0) {
+            setVida((prevVida) => Math.max(0, prevVida - 1));
+        }
+
+        if (luz) {
+            setEnergia(Math.max(0, energia - 1));
+        } else {
+            setEnergia(Math.min(ATRIBUTO_MAX, energia + 1));
         }
     }
 
@@ -58,11 +60,12 @@ export default function Emoji() {
                     <Atributo icone="⚡" valor={energia}></Atributo>
                     <Atributo icone="🍹" valor={agua}></Atributo>
                     <Atributo icone="🥩" valor={comida}></Atributo>
+                    {luz && "💡"}
                 </div>
                 <div className="acoes">
                     <button onClick={onAlimentar}>Alimentar</button>
                     <button onClick={onHidratar}>Hidratar</button>
-                    <button onClick={onLigarDesligar}>Ligar Luz</button>
+                    <button onClick={onLigarDesligar}>{luz ? "Desligar" : "Ligar"} Luz</button>
                     <button onClick={onCiclo}>Ciclo</button>
                 </div>
         </div>
