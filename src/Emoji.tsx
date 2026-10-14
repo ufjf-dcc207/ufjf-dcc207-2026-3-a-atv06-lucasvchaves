@@ -11,7 +11,6 @@ const EMOJI_MAP = new Map<EMOJI_KEYS, string>([
 ]);
 
 export default function Emoji() {
-    const [status, setStatus] = useState<EMOJI_KEYS>("happy");
     const [vida, setVida] = useState<number>(5);
     const [comida, setComida] = useState<number>(5);
     const [agua, setAgua] = useState<number>(5);
@@ -21,10 +20,12 @@ export default function Emoji() {
     const ATRIBUTO_MAX = 5;
 
     function onAlimentar() {
+        if (vida === 0) return;
         setComida(Math.min(ATRIBUTO_MAX, comida + 1));
     }
 
     function onHidratar() {
+        if (vida === 0) return;
         setAgua(Math.min(ATRIBUTO_MAX, agua + 1));
     }
 
@@ -33,6 +34,8 @@ export default function Emoji() {
     }
 
     function onCiclo() {
+        if (vida === 0) return;
+
         setComida(Math.max(0, comida - 1));
         if (comida === 0) {
             setVida(Math.max(0, vida - 1));
@@ -50,10 +53,18 @@ export default function Emoji() {
         }
     }
 
+    let status = EMOJI_MAP.get("happy");
+    if (agua === 0 || comida === 0 || energia === 0) {
+        status = EMOJI_MAP.get("sick");
+    }
+    if (vida === 0) {
+        status = EMOJI_MAP.get("dead");
+    }
+
     return (
         <div className="emoji">
                 <div className="face">
-                    {EMOJI_MAP.get(status) || "🫥"}
+                    {status}
                 </div>
                 <div className="atributos">
                     <Atributo icone="💚" valor={vida}></Atributo>
