@@ -27,39 +27,46 @@ export default function Emoji() {
     const ATRIBUTO_MAX = 5;
 
     function onAlimentar() {
-        //if (vida === 0) return;
-        //setComida(Math.min(ATRIBUTO_MAX, comida + 1));
+        if (emoji.vida === 0) return;
+        // Maneira bosta de fazer
+        const novoEmoji = structuredClone(emoji);
+        novoEmoji.comida = (Math.min(ATRIBUTO_MAX, emoji.comida + 1));
+        setEmoji(novoEmoji);
     }
 
     function onHidratar() {
-        //if (vida === 0) return;
-        //setAgua(Math.min(ATRIBUTO_MAX, agua + 1));
+        if (emoji.vida === 0) return;
+        // Maneira menos bosta de fazer
+        setEmoji({...emoji, agua:(Math.min(ATRIBUTO_MAX, emoji.agua + 1))});
     }
 
     function onLigarDesligar() {
-        //setLuz(!luz);
+        setEmoji({...emoji, luz: (!emoji.luz)});
     }
 
     function onCiclo() {
-        /*
-        if (vida === 0) return;
+        if (emoji.vida === 0) return;
 
-        setComida(Math.max(0, comida - 1));
-        if (comida === 0) {
-            setVida(Math.max(0, vida - 1));
+        const newEmoji = structuredClone(emoji);
+        if (newEmoji.comida === 0) {
+            newEmoji.vida = Math.max(0, newEmoji.vida - 1);
         }
+        newEmoji.comida = Math.max(0, emoji.comida - 1);
 
-        setAgua(Math.max(0, agua - 1));
-        if (comida === 0) {
-            setVida((prevVida) => Math.max(0, prevVida - 1));
+        if (newEmoji.agua === 0) {
+            newEmoji.vida = Math.max(0, newEmoji.vida - 1);
         }
+        newEmoji.agua = Math.max(0, newEmoji.agua - 1);
 
-        if (luz) {
-            setEnergia(Math.max(0, energia - 1));
+        if (newEmoji.luz) {
+            if (newEmoji.energia === 0) {
+                newEmoji.vida = Math.max(0, newEmoji.vida - 1);
+            }
+            newEmoji.energia = Math.max(0, newEmoji.energia - 1);
         } else {
-            setEnergia(Math.min(ATRIBUTO_MAX, energia + 1));
+            newEmoji.energia = Math.min(5, newEmoji.energia + 1);
         }
-        */
+        setEmoji(newEmoji);
     }
 
     let status = EMOJI_MAP.get("happy");
@@ -80,12 +87,12 @@ export default function Emoji() {
                     <Atributo icone="⚡" valor={emoji.energia}></Atributo>
                     <Atributo icone="🍹" valor={emoji.agua}></Atributo>
                     <Atributo icone="🥩" valor={emoji.comida}></Atributo>
-                    {luz && "💡"}
+                    {emoji.luz && "💡"}
                 </div>
                 <div className="acoes">
                     <button onClick={onAlimentar}>Alimentar</button>
                     <button onClick={onHidratar}>Hidratar</button>
-                    <button onClick={onLigarDesligar}>{luz ? "Desligar" : "Ligar"} Luz</button>
+                    <button onClick={onLigarDesligar}>{emoji.luz ? "Desligar" : "Ligar"} Luz</button>
                     <button onClick={onCiclo}>Ciclo</button>
                 </div>
         </div>
